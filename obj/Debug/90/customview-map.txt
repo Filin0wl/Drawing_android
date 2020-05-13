@@ -1,5 +1,6 @@
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 adaptive-icon;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
+android.support.design.widget.NavigationView;obj\Debug\90\res\layout\layout_menu.xml
 attr;obj\Debug\90\res\values\attrs.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 background;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml

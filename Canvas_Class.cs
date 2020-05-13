@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -16,8 +17,20 @@ namespace Drawing_android
     [Register("Drawing_android.Canvas_Class")]
     public class Canvas_Class : LinearLayout
     {
-        string canvas_text_label;
-        int count = 0;
+        Color color = Color.Blue;
+        bool emboss;
+        bool blur;
+        int strokeWidth;
+        Path path;
+        Bitmap mBitmap;
+        Canvas mCanvas;
+        private Path mPath;
+        private Paint mPaint;
+
+        private MaskFilter mEmboss;
+        private MaskFilter mBlur;
+
+        // Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
         TextView lbl;
         float x;
         float y;
@@ -28,15 +41,30 @@ namespace Drawing_android
         {
 
             Initialize(context);
+            SetWillNotDraw(false);
         }
 
         public Canvas_Class(Context context, IAttributeSet attrs) : base(context, attrs)
         {
             Initialize(context, attrs);
+            SetWillNotDraw(false);
         }
 
         private void Initialize(Context context, IAttributeSet attrs = null)
         {
+            mPaint = new Paint();
+            mPaint.AntiAlias = true;
+            mPaint.Dither = true;
+            mPaint.Color = color;
+            mPaint.SetStyle(Paint.Style.Stroke);
+            mPaint.StrokeJoin = Paint.Join.Round;
+            mPaint.StrokeCap = Paint.Cap.Round;
+            mPaint.SetXfermode(null);
+            mPaint.Alpha = 0xff;
+            mPath = new Path();
+
+            /*mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
+            mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.Normal);*/
             Inflate(context, Resource.Layout.layout_canvas, this);
             lbl = FindViewById<TextView>(Resource.Id.textView1);
             InitAttrProperties(context, attrs);
@@ -51,9 +79,15 @@ namespace Drawing_android
             }
 
             Android.Content.Res.TypedArray typedArray = context.ObtainStyledAttributes(attrs, Resource.Styleable.CanvasAttr);
-            canvas_text_label = typedArray.GetString(Resource.Styleable.CanvasAttr_text_lable);
+           
 
             this.Touch += Canvas_Class_Touch;
+            
+        }
+
+        private void DrawCanvas(Canvas obj)
+        {
+            throw new NotImplementedException();
         }
 
         private void Canvas_Class_Touch(object sender, TouchEventArgs e)
@@ -64,10 +98,14 @@ namespace Drawing_android
             switch (e.Event.Action)
             {
                 case MotionEventActions.Down: // нажатие
+                    mPath.MoveTo(x, y);
+                    Invalidate();
                     sDown = "Down: " + x + "," + y;
                     sMove = ""; sUp = "";
                     break;
                 case MotionEventActions.Move: // движение
+                    mPath.LineTo(x, y);
+                    Invalidate();
                     sMove = "Move: " + x + "," + y;
                     break;
                 case MotionEventActions.Up: // отпускание
@@ -77,9 +115,18 @@ namespace Drawing_android
                     break;
             }
             lbl.Text = sDown + "\n" + sMove + "\n" + sUp;
+            Invalidate();
 
             /* lbl.Text = count.ToString();
              count++;*/
+        }
+
+        protected override void OnDraw(Canvas canvas)
+        {
+            canvas.DrawPath(mPath, mPaint);
+            base.OnDraw(canvas);
+           
+  
         }
     }
 }

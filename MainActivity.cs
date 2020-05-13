@@ -10,7 +10,7 @@ using Java.Lang;
 namespace Drawing_android
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity, View.IOnTouchListener
+    public class MainActivity : AppCompatActivity //, View.IOnTouchListener
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,18 +23,7 @@ namespace Drawing_android
             view.SetOnTouchListener(this);*/
         }
 
-        public bool OnTouch(View v, MotionEvent e)
-        {
-            /*switch (e.Action)
-            {
-                case MotionEventActions.Down:
-                    break;
-                case MotionEventActions.Up:
-                    FindViewById<TextView>(Resource.Id.canvas).Text = "tuk";
-                    break;
-            }*/
-            return true;
-        }
+        
        
     }
 }

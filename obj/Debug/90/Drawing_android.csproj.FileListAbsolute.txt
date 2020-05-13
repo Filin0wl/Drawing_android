@@ -261,3 +261,4 @@ D:\dev\Drawing_android\Drawing_android\obj\Debug\90\stamp\_ConvertResourcesCases
 D:\dev\Drawing_android\Drawing_android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 D:\dev\Drawing_android\Drawing_android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 D:\dev\Drawing_android\Drawing_android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+D:\dev\Drawing_android\Drawing_android\obj\Debug\90\res\layout\layout_menu.xml
