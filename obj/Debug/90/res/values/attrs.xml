@@ -1,0 +1,1 @@
+<resources><declare-styleable name="CanvasAttr"><attr name="text_lable" format="string" /></declare-styleable></resources>
